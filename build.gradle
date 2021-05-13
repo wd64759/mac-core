@@ -22,15 +22,10 @@ allprojects {
 }
 
 dependencies {
-	compile 'org.springframework.boot:spring-boot-starter-actuator:2.4.3'
-	//a better way is to wrapper bytecode instrument in a separate jar and call it via Runtime.getRuntime().exec("java -jar another.jar bundle")
-	compile 'org.jboss.byteman:byteman:4.0.13'
-	compile 'org.jboss.byteman:byteman-install:4.0.13'
-	compile 'org.jboss.byteman:byteman-submit:4.0.13'
-	compileOnly 'org.projectlombok:lombok:1.18.20'
+	implementation files('../mac-annotation/build/libs/mac-annotation-1.0.jar')
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
 tasks.withType(JavaCompile) {
