@@ -68,6 +68,7 @@ public class AnnotationExposer {
 
     /**
      * To load mac agent with current PID
+     * @throws InterruptedException
      */
     protected static void startAgent() throws MacInitiatialException {
         String pid = getPID();
@@ -76,9 +77,11 @@ public class AnnotationExposer {
                 String cmd = String.format("%s %s", MAC_AGENT_CMD, pid);
                 System.out.println("exec - " + cmd);
                 Process agentProcess = Runtime.getRuntime().exec(cmd);
+                agentProcess.waitFor();
                 System.out.println("agent ID: " + agentProcess.pid());
                 System.out.println("exec return code - " + agentProcess.exitValue());
-            } catch (IOException e) {
+            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 throw new MacInitiatialException("fail to run mac agent", e);
             }
         }
