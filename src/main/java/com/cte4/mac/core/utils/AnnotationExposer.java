@@ -63,6 +63,7 @@ public class AnnotationExposer {
         } catch (IOException e) {
             log.error("fail to load MAC configuration file");
         }
+        System.out.println(sbuf.toString());
         buildCfg(sbuf.toString());
     }
 
@@ -123,6 +124,7 @@ public class AnnotationExposer {
                 System.out.println("output mac configuration file to: " + cfg.getCanonicalPath());
                 OutputStreamWriter out = new OutputStreamWriter(fo);
                 out.write(cfgCnt);
+                out.close();
             }
         } catch (Exception e) {
             throw new MacInitiatialException(e);
